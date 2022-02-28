@@ -1,3 +1,6 @@
-const Router = require('express').Router;
+const express = require('express');
+const router = express.Router();
 
-module.exports = Router;
+router.use('/symptoms/', require('./symptom.routes'));
+
+module.exports = router;

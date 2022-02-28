@@ -8,7 +8,10 @@ const cookieParser = require('cookie-parser');
 const app = express();
 
 // setup middleware
-app.use(cors());
+var corsOptions = {
+	origin: 'http://localhost:3000'
+};
+app.use(cors(corsOptions));
 dotenv.config();
 app.use(helmet());
 app.use(cookieParser());
