@@ -13,6 +13,7 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
 	}
 });
 
+// setup models.
 const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
@@ -24,6 +25,9 @@ db.ResultDeclaration = require('./resultDeclaration.model')(
 	Sequelize
 );
 
-// setup models.
+db.EpidemiologicalFactor = require('./epidemiologicalFactor.model')(
+	sequelize,
+	Sequelize
+);
 
 module.exports = db;
