@@ -11,4 +11,8 @@ router.use(
 
 router.use('/result-declaration/', require('./result-declaration.routes'));
 
+router.use(
+	'/health-declaration-types/',
+	require('./healthDeclarationType.routes')
+);
 module.exports = router;

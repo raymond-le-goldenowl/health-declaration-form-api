@@ -29,5 +29,9 @@ db.EpidemiologicalFactor = require('./epidemiologicalFactor.model')(
 	sequelize,
 	Sequelize
 );
+db.HealthDeclarationType = require('./healthDeclarationType.model')(
+	sequelize,
+	Sequelize
+);
 
 module.exports = db;
