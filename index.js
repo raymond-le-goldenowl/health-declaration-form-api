@@ -1,5 +1,4 @@
 const cors = require('cors');
-const dotenv = require('dotenv');
 const helmet = require('helmet');
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -12,11 +11,10 @@ var corsOptions = {
 	origin: 'http://localhost:3000'
 };
 app.use(cors(corsOptions));
-dotenv.config();
 app.use(helmet());
 app.use(cookieParser());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // setup routes
 app.get('/test', (req, res) => {

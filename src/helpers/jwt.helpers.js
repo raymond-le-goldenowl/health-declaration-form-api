@@ -1,5 +1,7 @@
-const jwtConfig = require('config/jwt.config');
 const jwt = require('jsonwebtoken');
+
+const { Auth } = require('../models');
+const jwtConfig = require('../config/jwt.config');
 
 const generateAccessToken = payload => {
 	return jwt.sign(
@@ -47,7 +49,7 @@ const verifyAccessToken = async (req, res, next) => {
 		const decoded = jwt.verify(token, jwtConfig.ACCESS_TOKEN_SECRET);
 		const user = await Auth.findOne({ where: { username: decoded.username } });
 
-		if (user) {
+		if (user && user.is_active != null) {
 			req.user = user;
 			return next();
 		} else {
