@@ -1,10 +1,14 @@
 const User = require('../models').User;
 
 exports.requestSave = async (req, res) => {
+	// validate values.
+
+	// get values from body.
 	const phone_number = req.body.phone_number || null;
 
 	const isPhoneNumberValid = true;
 
+	// Check is valid phone number.
 	if (phone_number !== null && isPhoneNumberValid) {
 		// Create otp_code
 		const generate_otp_code = 1412;
@@ -12,12 +16,14 @@ exports.requestSave = async (req, res) => {
 		// send otp_code to user's phone.
 		// ....generate_otp_code...
 
+		// sending result while all are valid.
 		return res.json({
 			success: true,
 			data: null,
 			message: 'Please check OTP code in your phone!'
 		});
 	} else {
+		// sending error while has some error.
 		return res
 			.status(400)
 			.json({ success: false, data: null, message: 'Phone number invalid!' });
@@ -54,11 +60,25 @@ exports.save = async (req, res) => {
 				otp_code: req.body.otp_code
 			};
 
+			// Just need a user with by phone number.
 			if (userByPhoneNumber) {
-				return res.json({
-					success: true,
-					data: newUser
-				});
+				// Update user by id here
+				const userUpdated = await User.update(newUser);
+
+				if (userUpdated) {
+					// return result user after update
+					return res.json({
+						success: true,
+						data: newUser,
+						message: 'User was updated!'
+					});
+				} else {
+					return res.json({
+						success: false,
+						data: null,
+						message: 'Can not update user'
+					});
+				}
 			}
 
 			// Save UserInfo in the database
@@ -71,7 +91,7 @@ exports.save = async (req, res) => {
 					message: 'User info saved!'
 				});
 			} else {
-				return res.status(500).send({
+				return res.status(500).json({
 					success: false,
 					message: 'Some error occurred while creating the User.'
 				});
@@ -108,7 +128,7 @@ exports.currentByPhoneNumber = async (req, res) => {
 		return res.status(500).json({
 			success: false,
 			data: null,
-			message: err.message || 'Some error occurred while retrieving User.'
+			message: 'Some error occurred while retrieving User.'
 		});
 	}
 };

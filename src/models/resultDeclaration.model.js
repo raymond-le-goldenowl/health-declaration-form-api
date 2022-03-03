@@ -50,13 +50,13 @@ module.exports = (sequelize, Sequelize) => {
 				type: Sequelize.STRING
 			},
 
-			user_id: {
-				type: Sequelize.INTEGER,
+			user_phone_number: {
+				type: Sequelize.STRING(15),
 				allowNull: false
 			},
 			declaration_type_id: {
 				type: Sequelize.INTEGER,
-				allowNull: true
+				allowNull: false
 			}
 		},
 		{ tableName: 'result_declaration' }

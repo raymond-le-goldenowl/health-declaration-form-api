@@ -5,6 +5,9 @@ const ResultDeclarationController = require('../controllers/resultDeclaration.co
 
 router.post('/create', ResultDeclarationController.create);
 
-router.get('/all/:userId', ResultDeclarationController.findAllByUserId);
+router.get(
+	'/all/:user_phone_number',
+	ResultDeclarationController.findAllByUserPhoneNumber
+);
 
 module.exports = router;
