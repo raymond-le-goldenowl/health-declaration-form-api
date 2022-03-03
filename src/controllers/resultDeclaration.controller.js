@@ -22,7 +22,7 @@ exports.create = async (req, res) => {
 			disease_symptoms: req.body.disease_symptoms,
 			epidemiological_factors: req.body.epidemiological_factors,
 			other_symptoms: req.body.other_symptoms,
-			user_phone_number: userByPhoneNumber.id,
+			user_phone_number: req.body.phone_number,
 			declaration_type_id: req.body.declaration_type_id
 		};
 
