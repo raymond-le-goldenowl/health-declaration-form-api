@@ -18,7 +18,11 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 db.Symptom = require('./symptom.model')(sequelize, Sequelize);
-db.Auth = require('./auth.model')(sequelize, Sequelize);
+db.User = require('./user.model')(sequelize, Sequelize);
+db.ResultDeclaration = require('./resultDeclaration.model')(
+	sequelize,
+	Sequelize
+);
 
 // setup models.
 
