@@ -15,7 +15,7 @@ module.exports = (sequelize, Sequelize) => {
 				type: Sequelize.STRING
 			},
 			date_of_birth: {
-				type: Sequelize.DATE
+				type: Sequelize.STRING
 			},
 			sex: {
 				type: Sequelize.STRING
@@ -47,11 +47,6 @@ module.exports = (sequelize, Sequelize) => {
 
 			// dành cho loại 3, 4, 5
 			id_card_number: {
-				type: Sequelize.STRING
-			},
-
-			// dành cho xác thực.
-			otp_code: {
 				type: Sequelize.STRING
 			}
 		},
