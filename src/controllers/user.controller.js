@@ -1,5 +1,5 @@
 const moment = require('moment');
-const { DATE_FORMAT } = require('../../constants');
+const { DATE_FORMAT } = require('../constants');
 
 const User = require('../models').User;
 

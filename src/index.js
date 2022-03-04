@@ -21,7 +21,7 @@ app.get('/test', (req, res) => {
 	res.send('Running!');
 });
 
-app.use('/api/', require('./src/routes/index.routes'));
+app.use('/api/', require('./routes/index.routes'));
 
 // handler errors
 app.all('*', (_, res) => {
@@ -29,7 +29,7 @@ app.all('*', (_, res) => {
 });
 
 // handle any thrown errors
-app.use(require('./src/middlewares/errorHandler'));
+app.use(require('./middlewares/errorHandler'));
 
 // run server
 const PORT = process.env.PORT || 1412;
