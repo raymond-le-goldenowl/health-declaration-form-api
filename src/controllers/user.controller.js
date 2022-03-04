@@ -1,3 +1,6 @@
+const moment = require('moment');
+const { DATE_FORMAT } = require('../../constants');
+
 const User = require('../models').User;
 
 exports.requestSave = async (req, res) => {
@@ -40,30 +43,31 @@ exports.save = async (req, res) => {
 
 		// get otp and verify code here
 		const otp_code = req.body.otp_code;
-		const verifyOtpCode = otp_code === 1412;
+		const verifyOtpCode = Number(otp_code) === 1412;
 
 		if (verifyOtpCode) {
 			// create basic info
 			const newUser = {
-				phone_number: req.body.phone_number,
+				phone_number: `${req.body.phone_number}`,
 				full_name: req.body.full_name,
 				date_of_birth: req.body.date_of_birth,
 				sex: req.body.sex,
-				employee_code: req.body.employee_code,
-				department: req.body.department,
+				employee_code: req.body?.employee_code || '',
+				department: req.body?.department || '',
 				national: req.body.national,
 				province: req.body.province,
 				district: req.body.district,
 				ward: req.body.ward,
 				house_number: req.body.house_number,
-				id_card_number: req.body.id_card_number,
-				otp_code: req.body.otp_code
+				id_card_number: req.body?.id_card_number || ''
 			};
 
 			// Just need a user with by phone number.
 			if (userByPhoneNumber) {
 				// Update user by id here
-				const userUpdated = await User.update(newUser);
+				const userUpdated = await User.update(newUser, {
+					where: { id: userByPhoneNumber.id }
+				});
 
 				if (userUpdated) {
 					// return result user after update
@@ -83,16 +87,18 @@ exports.save = async (req, res) => {
 
 			// Save UserInfo in the database
 			const resultCreateUser = await User.create(newUser);
+
 			if (resultCreateUser) {
-				delete data.id;
+				delete resultCreateUser.id;
 				return res.json({
 					success: true,
-					data: data,
+					data: resultCreateUser,
 					message: 'User info saved!'
 				});
 			} else {
 				return res.status(500).json({
 					success: false,
+					data: null,
 					message: 'Some error occurred while creating the User.'
 				});
 			}

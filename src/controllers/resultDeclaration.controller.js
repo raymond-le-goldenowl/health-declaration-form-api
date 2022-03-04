@@ -7,7 +7,7 @@ exports.create = async (req, res) => {
 
 	// get userid by phone.
 	const userByPhoneNumber = await User.findOne({
-		where: { phone_number: req.body.phone_number }
+		where: { phone_number: req.body.user_phone_number }
 	});
 
 	if (userByPhoneNumber) {
@@ -22,7 +22,7 @@ exports.create = async (req, res) => {
 			disease_symptoms: req.body.disease_symptoms,
 			epidemiological_factors: req.body.epidemiological_factors,
 			other_symptoms: req.body.other_symptoms,
-			user_phone_number: req.body.phone_number,
+			user_phone_number: req.body.user_phone_number,
 			declaration_type_id: req.body.declaration_type_id
 		};
 
@@ -30,7 +30,11 @@ exports.create = async (req, res) => {
 		const resultCreate = await ResultDeclaration.create(newResultDeclaration);
 
 		if (resultCreate) {
-			return res.json({ success: true, data: data, message: 'Data saved.' });
+			return res.json({
+				success: true,
+				data: resultCreate,
+				message: 'Data saved.'
+			});
 		} else {
 			return res.status(500).json({
 				success: false,
