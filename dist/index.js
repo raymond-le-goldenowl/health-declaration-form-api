@@ -16,7 +16,7 @@ var _errorHandler = _interopRequireDefault(require("./middlewares/errorHandler")
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var app = (0, _express.default)(); // setup middleware
+const app = (0, _express.default)(); // setup middleware
 
 var corsOptions = {
   origin: 'http://localhost:3000'
@@ -29,12 +29,12 @@ app.use(_bodyParser.default.urlencoded({
   extended: false
 })); // setup routes
 
-app.get('/test', function (req, res) {
+app.get('/test', (req, res) => {
   res.send('Running!');
 });
 app.use('/api/', _index.default); // handler errors
 
-app.all('*', function (_, res) {
+app.all('*', (_, res) => {
   return res.status(404).json({
     message: 'Error 404',
     success: false
@@ -43,7 +43,7 @@ app.all('*', function (_, res) {
 
 app.use(_errorHandler.default); // run server
 
-var PORT = process.env.PORT || 1412;
-app.listen(PORT, function () {
-  console.log("Running on http://localhost:".concat(PORT));
+const PORT = process.env.PORT || 1412;
+app.listen(PORT, () => {
+  console.log(`Running on http://localhost:${PORT}`);
 });
