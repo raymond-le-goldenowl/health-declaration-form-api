@@ -1,8 +1,9 @@
-const express = require('express');
+import express from 'express';
+import HealthDeclarationTypeController from '@/controllers/HealthDeclarationType.controller';
+
 const router = express.Router();
-const HealthDeclarationTypeController = require('../controllers/HealthDeclarationType.controller');
 
 router.get('/', HealthDeclarationTypeController.findAll);
 router.get('/:id', HealthDeclarationTypeController.findOne);
 
-module.exports = router;
+export default router;

@@ -1,4 +1,4 @@
-module.exports = (sequelize, Sequelize) => {
+export default (sequelize, Sequelize) => {
 	const EpidemiologicalFactor = sequelize.define(
 		'epidemiological_factor',
 		{

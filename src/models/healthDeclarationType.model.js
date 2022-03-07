@@ -1,4 +1,4 @@
-module.exports = (sequelize, Sequelize) => {
+export default (sequelize, Sequelize) => {
 	const HealthDeclarationType = sequelize.define(
 		'health_declaration_type',
 		{

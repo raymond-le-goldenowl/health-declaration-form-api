@@ -1,7 +1,8 @@
-const express = require('express');
+import express from 'express';
+
 const router = express.Router();
 
-const ResultDeclarationController = require('../controllers/resultDeclaration.controller');
+import ResultDeclarationController from '@/controllers/resultDeclaration.controller';
 
 router.post('/create', ResultDeclarationController.create);
 
@@ -10,4 +11,4 @@ router.get(
 	ResultDeclarationController.findAllByUserPhoneNumber
 );
 
-module.exports = router;
+export default router;

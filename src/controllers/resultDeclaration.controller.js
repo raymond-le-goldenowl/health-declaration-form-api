@@ -1,8 +1,10 @@
-const User = require('../models').User;
-const ResultDeclaration = require('../models').ResultDeclaration;
+import models from '@/models';
+
+const User = models.User;
+const ResultDeclaration = models.ResultDeclaration;
 
 // Create new UserInfo.
-exports.create = async (req, res) => {
+const create = async (req, res) => {
 	// validate data
 
 	// get userid by phone.
@@ -50,7 +52,7 @@ exports.create = async (req, res) => {
 };
 
 // Retrieve all UserInfo from the database.
-exports.findAllByUserPhoneNumber = async (req, res) => {
+const findAllByUserPhoneNumber = async (req, res) => {
 	const allResult = await Auth.findAll({
 		where: { user_phone_number: req.params.user_phone_number }
 	});
@@ -67,4 +69,9 @@ exports.findAllByUserPhoneNumber = async (req, res) => {
 			message: `Not found any result by user id`
 		});
 	}
+};
+
+export default {
+	create,
+	findAllByUserPhoneNumber
 };

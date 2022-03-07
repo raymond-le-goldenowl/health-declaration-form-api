@@ -1,4 +1,4 @@
-module.exports = (sequelize, Sequelize) => {
+export default (sequelize, Sequelize) => {
 	const ResultDeclaration = sequelize.define(
 		'result_declaration',
 		{

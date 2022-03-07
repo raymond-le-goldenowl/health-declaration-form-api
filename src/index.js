@@ -1,8 +1,8 @@
-const cors = require('cors');
-const helmet = require('helmet');
-const express = require('express');
-const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
+import cors from 'cors';
+import helmet from 'helmet';
+import express from 'express';
+import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
 
 const app = express();
 
@@ -21,7 +21,8 @@ app.get('/test', (req, res) => {
 	res.send('Running!');
 });
 
-app.use('/api/', require('./routes/index.routes'));
+import routesIndex from '@/routes/index.routes';
+app.use('/api/', routesIndex);
 
 // handler errors
 app.all('*', (_, res) => {
@@ -29,7 +30,8 @@ app.all('*', (_, res) => {
 });
 
 // handle any thrown errors
-app.use(require('./middlewares/errorHandler'));
+import errorHandler from '@/middlewares/errorHandler';
+app.use(errorHandler);
 
 // run server
 const PORT = process.env.PORT || 1412;

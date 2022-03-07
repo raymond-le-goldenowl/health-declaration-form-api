@@ -1,5 +1,11 @@
-const { Sequelize } = require('sequelize');
-const dbConfig = require('../config/db.config');
+import { Sequelize } from 'sequelize';
+import dbConfig from '@/config/db.config';
+
+import user from './user.model';
+import symptom from './symptom.model';
+import resultDeclarationModel from './resultDeclaration.model';
+import healthDeclarationType from './healthDeclarationType.model';
+import epidemiologicalFactorModel from './epidemiologicalFactor.model';
 
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
 	host: dbConfig.HOST,
@@ -18,20 +24,10 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-db.Symptom = require('./symptom.model')(sequelize, Sequelize);
-db.User = require('./user.model')(sequelize, Sequelize);
-db.ResultDeclaration = require('./resultDeclaration.model')(
-	sequelize,
-	Sequelize
-);
+db.User = user(sequelize, Sequelize);
+db.Symptom = symptom(sequelize, Sequelize);
+db.ResultDeclaration = resultDeclarationModel(sequelize, Sequelize);
+db.HealthDeclarationType = healthDeclarationType(sequelize, Sequelize);
+db.EpidemiologicalFactor = epidemiologicalFactorModel(sequelize, Sequelize);
 
-db.EpidemiologicalFactor = require('./epidemiologicalFactor.model')(
-	sequelize,
-	Sequelize
-);
-db.HealthDeclarationType = require('./healthDeclarationType.model')(
-	sequelize,
-	Sequelize
-);
-
-module.exports = db;
+export default db;

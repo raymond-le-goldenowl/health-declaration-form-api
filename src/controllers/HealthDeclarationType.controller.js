@@ -1,7 +1,8 @@
-const HealthDeclarationType = require('../models').HealthDeclarationType;
+import models from '@/models';
+const HealthDeclarationType = models.HealthDeclarationType;
 
 // Retrieve all HealthDeclarationTypes from the database.
-exports.findAll = (req, res) => {
+const findAll = (req, res) => {
 	HealthDeclarationType.findAll()
 		.then(data => {
 			res.json(data);
@@ -16,7 +17,7 @@ exports.findAll = (req, res) => {
 };
 
 // Find a single HealthDeclarationType with an id
-exports.findOne = (req, res) => {
+const findOne = (req, res) => {
 	const id = req.params.id;
 	HealthDeclarationType.findByPk(id)
 		.then(data => {
@@ -33,4 +34,9 @@ exports.findOne = (req, res) => {
 				message: 'Error retrieving HealthDeclarationType with id=' + id
 			});
 		});
+};
+
+export default {
+	findAll,
+	findOne
 };

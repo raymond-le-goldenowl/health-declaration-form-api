@@ -1,8 +1,8 @@
-const express = require('express');
-const router = express.Router();
+import express from 'express';
+import validation from '@/validation/auth.validation';
+import UserController from '@/controllers/user.controller';
 
-const validation = require('../validation/auth.validation');
-const UserController = require('../controllers/user.controller');
+const router = express.Router();
 
 router.post('/save', UserController.save);
 

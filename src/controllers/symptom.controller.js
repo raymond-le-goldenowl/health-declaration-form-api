@@ -1,8 +1,9 @@
-const Symptom = require('../models').Symptom;
-const Op = require('../models').Sequelize.Op;
+import models from '@/models';
+
+const Symptom = models.Symptom;
 
 // Retrieve all Symptoms from the database.
-exports.findAll = (req, res) => {
+const findAll = (req, res) => {
 	Symptom.findAll()
 		.then(data => {
 			res.json(data);
@@ -15,7 +16,7 @@ exports.findAll = (req, res) => {
 };
 
 // Find a single Symptom with an id
-exports.findOne = (req, res) => {
+const findOne = (req, res) => {
 	const id = req.params.id;
 	Symptom.findByPk(id)
 		.then(data => {
@@ -33,3 +34,5 @@ exports.findOne = (req, res) => {
 			});
 		});
 };
+
+export default { findAll, findOne };

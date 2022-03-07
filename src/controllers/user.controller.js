@@ -1,9 +1,8 @@
-const moment = require('moment');
-const { DATE_FORMAT } = require('../constants');
+import models from '@/models';
 
-const User = require('../models').User;
+const User = models.User;
 
-exports.requestSave = async (req, res) => {
+const requestSave = async (req, res) => {
 	// validate values.
 
 	// get values from body.
@@ -34,7 +33,7 @@ exports.requestSave = async (req, res) => {
 };
 
 // Create new UserInfo.
-exports.save = async (req, res) => {
+const save = async (req, res) => {
 	try {
 		// find one by phone number
 		const userByPhoneNumber = await User.findOne({
@@ -120,7 +119,7 @@ exports.save = async (req, res) => {
 };
 
 // Find a single UserInfo with an id
-exports.currentByPhoneNumber = async (req, res) => {
+const currentByPhoneNumber = async (req, res) => {
 	const currentUser = await User.findOne({
 		where: { phone_number: req.params.phone_number }
 	});
@@ -138,3 +137,5 @@ exports.currentByPhoneNumber = async (req, res) => {
 		});
 	}
 };
+
+export default { requestSave, save, currentByPhoneNumber };

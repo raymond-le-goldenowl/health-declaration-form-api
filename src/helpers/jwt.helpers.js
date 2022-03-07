@@ -1,7 +1,6 @@
-const jwt = require('jsonwebtoken');
-
-const { Auth } = require('../models');
-const jwtConfig = require('../config/jwt.config');
+import jwt from 'jsonwebtoken';
+import { Auth } from '@/models';
+import jwtConfig from '@/config/jwt.config';
 
 const generateAccessToken = payload => {
 	return jwt.sign(
@@ -60,7 +59,7 @@ const verifyAccessToken = async (req, res, next) => {
 	}
 };
 
-module.exports = {
+export default {
 	generateAccessToken,
 	generateRefreshToken,
 	verifyRefreshToken,

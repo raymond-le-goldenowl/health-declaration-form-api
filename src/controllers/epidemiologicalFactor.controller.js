@@ -1,7 +1,9 @@
-const EpidemiologicalFactor = require('../models').EpidemiologicalFactor;
+import models from '@/models';
+
+const EpidemiologicalFactor = models.EpidemiologicalFactor;
 
 // Retrieve all EpidemiologicalFactors from the database.
-exports.findAll = (req, res) => {
+const findAll = (req, res) => {
 	EpidemiologicalFactor.findAll()
 		.then(data => {
 			res.json(data);
@@ -16,7 +18,7 @@ exports.findAll = (req, res) => {
 };
 
 // Find a single EpidemiologicalFactor with an id
-exports.findOne = (req, res) => {
+const findOne = (req, res) => {
 	const id = req.params.id;
 	EpidemiologicalFactor.findByPk(id)
 		.then(data => {
@@ -33,4 +35,9 @@ exports.findOne = (req, res) => {
 				message: 'Error retrieving EpidemiologicalFactor with id=' + id
 			});
 		});
+};
+
+export default {
+	findAll,
+	findOne
 };

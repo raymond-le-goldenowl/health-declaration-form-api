@@ -1,8 +1,9 @@
-const express = require('express');
+import express from 'express';
+import EpidemiologicalFactorController from '@/controllers/epidemiologicalFactor.controller';
+
 const router = express.Router();
-const EpidemiologicalFactorController = require('../controllers/epidemiologicalFactor.controller');
 
 router.get('/', EpidemiologicalFactorController.findAll);
 router.get('/:id', EpidemiologicalFactorController.findOne);
 
-module.exports = router;
+export default router;
