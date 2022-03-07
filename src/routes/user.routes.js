@@ -1,13 +1,21 @@
 import express from 'express';
-import validation from '@/validation/auth.validation';
 import UserController from '@/controllers/user.controller';
+import userValidation from '@/validation/user.validation';
 
 const router = express.Router();
 
-router.post('/save', UserController.save);
+router.post('/save', userValidation.saveValidate, UserController.save);
 
-router.post('/request-save', UserController.requestSave);
+router.post(
+	'/request-save',
+	userValidation.requestSaveValidate,
+	UserController.requestSave
+);
 
-router.get('/current', UserController.currentByPhoneNumber);
+router.get(
+	'/current',
+	userValidation.currentByPhoneNumberValidate,
+	UserController.currentByPhoneNumber
+);
 
 module.exports = router;
