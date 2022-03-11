@@ -1,7 +1,6 @@
 import express from 'express';
 
 import userRoutes from './user.routes';
-
 import symptomRoutes from './symptom.routes';
 import resultDeclarationRoutes from './result-declaration.routes';
 import healthDeclarationTypeRoutes from './healthDeclarationType.routes';

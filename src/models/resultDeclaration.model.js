@@ -54,7 +54,11 @@ export default (sequelize, Sequelize) => {
 				allowNull: false
 			},
 			declaration_type_id: {
-				type: Sequelize.INTEGER,
+				type: Sequelize.UUID,
+				allowNull: false
+			},
+			user_id: {
+				type: Sequelize.UUID,
 				allowNull: false
 			}
 		},

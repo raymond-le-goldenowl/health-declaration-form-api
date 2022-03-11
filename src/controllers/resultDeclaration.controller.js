@@ -1,3 +1,5 @@
+import { v4 as uuid } from 'uuid';
+
 import models from '@/models';
 
 const User = models.User;
@@ -6,18 +8,15 @@ const ResultDeclaration = models.ResultDeclaration;
 // Create new UserInfo.
 const create = async (req, res) => {
 	try {
-		// find one by phone number
-		const userByPhoneNumber = await User.findOne({
-			where: { phone_number: req.body.phone_number }
-		});
-
 		// get otp and verify code here
 		const otp_code = req.body.otp_code;
 		const verifyOtpCode = Number(otp_code) === 1412;
 
 		if (verifyOtpCode) {
+			const user_id = uuid();
 			// create basic info
 			const newUser = {
+				id: user_id,
 				phone_number: `${req.body.phone_number}`,
 				full_name: req.body.full_name,
 				date_of_birth: req.body.date_of_birth,
@@ -39,6 +38,7 @@ const create = async (req, res) => {
 			if (resultCreateUser) {
 				// Create base model to save
 				const newResultDeclaration = {
+					id: uuid(),
 					declaration_place: req.body.declaration_place,
 					place_of_test: req.body.place_of_test,
 					background_disease: req.body.background_disease,
@@ -48,8 +48,9 @@ const create = async (req, res) => {
 					disease_symptoms: req.body.disease_symptoms,
 					epidemiological_factors: req.body.epidemiological_factors,
 					other_symptoms: req.body.other_symptoms,
-					user_phone_number: req.body.user_phone_number,
-					declaration_type_id: req.body.declaration_type_id
+					user_phone_number: req.body.phone_number,
+					declaration_type_id: req.body.declaration_type_id,
+					user_id: user_id
 				};
 
 				// Save UserInfo in the database
@@ -64,6 +65,10 @@ const create = async (req, res) => {
 						message: 'Data saved.'
 					});
 				} else {
+					// delete user if can't create declaration form data.
+					User.destroy({ where: { id: user_id } });
+
+					// return error message
 					return res.status(500).json({
 						success: false,
 						message: 'Some error occurred while creating the data.'

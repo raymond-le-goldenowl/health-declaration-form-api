@@ -4,13 +4,14 @@ import userValidation from '@/validation/user.validation';
 
 const router = express.Router();
 
-router.post('/save', userValidation.saveValidate, UserController.save);
 
 router.post(
 	'/request-save',
 	userValidation.requestSaveValidate,
 	UserController.requestSave
 );
+
+router.post('/save', userValidation.saveValidate, UserController.save);
 
 router.get(
 	'/current',
