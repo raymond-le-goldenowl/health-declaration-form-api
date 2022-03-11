@@ -3,9 +3,8 @@ export default (sequelize, Sequelize) => {
 		'symptom',
 		{
 			id: {
-				type: Sequelize.INTEGER,
+				type: Sequelize.UUID,
 				allowNull: false,
-				autoIncrement: true,
 				primaryKey: true
 			},
 			content: {

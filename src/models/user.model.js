@@ -3,9 +3,8 @@ export default (sequelize, Sequelize) => {
 		'user_info',
 		{
 			id: {
-				type: Sequelize.INTEGER,
+				type: Sequelize.UUID,
 				allowNull: false,
-				autoIncrement: true,
 				primaryKey: true
 			},
 			phone_number: {
