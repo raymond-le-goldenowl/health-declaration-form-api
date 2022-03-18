@@ -1,4 +1,5 @@
 import models from '@/models';
+import { generateAccessToken } from '@/helpers/jwt.helpers';
 
 const User = models.User;
 
@@ -119,23 +120,162 @@ const save = async (req, res) => {
 };
 
 // Find a single UserInfo with an id
-const currentByPhoneNumber = async (req, res) => {
-	const currentUser = await User.findOne({
-		where: { phone_number: req.params.phone_number }
-	});
-	if (currentUser) {
-		return res.json({
-			success: true,
-			data: data,
-			message: `Got a user with ${req.params.phone_number}`
+const userById = async (req, res) => {
+	try {
+		const user_id = req.params.id;
+		const user = await User.findOne({
+			where: { id: user_id }
 		});
-	} else {
-		return res.status(500).json({
+		if (user) {
+			return res.json({
+				success: true,
+				data: user,
+				message: `Got a user with ${user_id}`
+			});
+		} else {
+			return res.status(500).json({
+				success: false,
+				data: null,
+				message: 'Some error occurred while retrieving User.'
+			});
+		}
+	} catch (error) {
+		return res.json({
 			success: false,
 			data: null,
-			message: 'Some error occurred while retrieving User.'
+			message: error.message
 		});
 	}
 };
 
-export default { requestSave, save, currentByPhoneNumber };
+const getAllUsersByPhoneNumber = async (req, res) => {
+	try {
+		const { phone_number } = req.body;
+
+		const resultGetAllUsers = await User.findAll({
+			where: { phone_number }
+		});
+
+		if (resultGetAllUsers) {
+			return res.json({
+				success: true,
+				data: resultGetAllUsers,
+				message: `Get all users successfully!`
+			});
+		} else {
+			return res.status(500).json({
+				success: false,
+				data: null,
+				message: 'Some error occurred while retrieving User.'
+			});
+		}
+	} catch (error) {
+		return res.json({
+			success: false,
+			data: null,
+			message: error.message
+		});
+	}
+};
+
+const auth = async (req, res) => {
+	try {
+		// get body values from request
+		const { phone_number, otp_code } = req.body;
+
+		// check OTP code here
+		const isOTPByPhoneNumberValid = otp_code && true;
+
+		// phone number valid will return accessToken, invalid will return error.
+		if (isOTPByPhoneNumberValid) {
+			const payload = { phone_number: phone_number };
+			const accessToken = generateAccessToken(payload);
+
+			return res.json({
+				success: true,
+				data: accessToken,
+				message: `Get access token successfully!`
+			});
+		} else {
+			return res.status(500).json({
+				success: false,
+				data: null,
+				message: 'Invalid phone number!'
+			});
+		}
+	} catch (error) {
+		return res.json({
+			success: false,
+			data: null,
+			message: error.message
+		});
+	}
+};
+
+const requestSendOTPToUser = async (req, res) => {
+	try {
+		// get body values from request
+		const { phone_number } = req.body;
+		const findUserByPhoneNumber = await User.findOne({
+			where: { phone_number: phone_number }
+		});
+		if (findUserByPhoneNumber) {
+			return res.json({
+				success: true,
+				data: null,
+				message: `Please check your phone!`
+			});
+		} else {
+			return res.status(500).json({
+				success: false,
+				data: null,
+				message: 'Invalid phone number!'
+			});
+		}
+	} catch (error) {
+		return res.json({
+			success: false,
+			data: null,
+			message: error.message
+		});
+	}
+};
+
+const userByPhoneNumber = async (req, res) => {
+	try {
+		// get body values from request
+		const { phone_number } = req.body;
+		const findUserByPhoneNumber = await User.findOne({
+			where: { phone_number: phone_number }
+		});
+		if (findUserByPhoneNumber) {
+			return res.json({
+				success: true,
+				data: findUserByPhoneNumber,
+				message: `Get one user by phone number!`
+			});
+		} else {
+			return res.status(500).json({
+				success: false,
+				data: null,
+				message: 'Invalid phone number!'
+			});
+		}
+	} catch (error) {
+		return res.json({
+			success: false,
+			data: null,
+			message: error.message
+		});
+	}
+};
+
+export default {
+	requestSave,
+	save,
+	userById,
+	getAllUsersByPhoneNumber,
+	auth,
+	requestSendOTPToUser,
+	userByPhoneNumber
+};
