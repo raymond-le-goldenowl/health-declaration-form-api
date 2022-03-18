@@ -1,5 +1,4 @@
 import jwt from 'jsonwebtoken';
-import { Auth } from '@/models';
 import jwtConfig from '@/config/jwt.config';
 
 const generateAccessToken = payload => {
@@ -41,15 +40,13 @@ const verifyRefreshToken = (
 
 const verifyAccessToken = async (req, res, next) => {
 	try {
-		const authHeader = req.headers['authorization'];
-		if (!authHeader) return res.sendStatus(401);
-		const token = authHeader.split(' ')[1];
+		const { accessToken } = req.body;
+		if (!accessToken) return res.sendStatus(401);
 
-		const decoded = jwt.verify(token, jwtConfig.ACCESS_TOKEN_SECRET);
-		const user = await Auth.findOne({ where: { username: decoded.username } });
+		const decoded = jwt.verify(accessToken, jwtConfig.ACCESS_TOKEN_SECRET);
 
-		if (user && user.is_active != null) {
-			req.user = user;
+		if (decoded) {
+			req.body.phone_number = decoded.phone_number;
 			return next();
 		} else {
 			return res.status(401).json({ success: false, message: 'Unauthorize' });
@@ -59,9 +56,9 @@ const verifyAccessToken = async (req, res, next) => {
 	}
 };
 
-export default {
+export {
 	generateAccessToken,
 	generateRefreshToken,
-	verifyRefreshToken,
-	verifyAccessToken
+	verifyAccessToken,
+	verifyRefreshToken
 };
