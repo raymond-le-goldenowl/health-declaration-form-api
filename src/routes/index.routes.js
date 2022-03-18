@@ -8,7 +8,6 @@ import epidemiologicalFactorsRoutes from './epidemiological_factor.routes';
 
 const router = express.Router();
 
-
 router.use('/user/', userRoutes);
 
 router.use('/symptoms/', symptomRoutes);

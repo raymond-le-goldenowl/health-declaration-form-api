@@ -4,17 +4,16 @@ const router = express.Router();
 
 import ResultDeclarationController from '@/controllers/resultDeclaration.controller';
 
+import { verifyAccessToken } from '@/helpers/jwt.helpers';
 import resultDeclarationValidate from '@/validation/resultDeclaration.validation';
-router.post(
-	'/create',
-	resultDeclarationValidate.createValidate,
-	ResultDeclarationController.create
-);
 
-router.get(
-	'/all/:user_phone_number',
+router.post('/create', verifyAccessToken, ResultDeclarationController.create);
+
+router.post(
+	'/all',
+	verifyAccessToken,
 	resultDeclarationValidate.findAllByUserPhoneNumberValidate,
-	ResultDeclarationController.findAllByUserPhoneNumber
+	ResultDeclarationController.findAllByPhoneNumber
 );
 
 export default router;

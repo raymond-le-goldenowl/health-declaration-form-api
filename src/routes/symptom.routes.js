@@ -8,4 +8,4 @@ router.get('/', SymptomController.findAll);
 
 router.get('/:id', SymptomController.findOne);
 
-module.exports = router;
+export default router;
