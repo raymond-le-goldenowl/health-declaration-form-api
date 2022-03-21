@@ -114,7 +114,38 @@ const findAllByPhoneNumber = async (req, res) => {
 	}
 };
 
+const getOneById = async (req, res) => {
+	try {
+		const phone_number = req.body?.phone_number;
+		const resultId = req.params?.id;
+
+		const oneResult = await ResultDeclaration.findOne({
+			where: { id: resultId }
+		});
+
+		if (oneResult) {
+			return res.json({
+				success: true,
+				data: oneResult,
+				message: `Get one successfully with id = ${resultId}`
+			});
+		} else {
+			return res.json({
+				success: false,
+				data: null,
+				message: `Can't get value with id = ${resultId}`
+			});
+		}
+	} catch (error) {
+		return res.json({
+			success: false,
+			data: null,
+			message: error.message
+		});
+	}
+};
 export default {
 	create,
-	findAllByPhoneNumber
+	findAllByPhoneNumber,
+	getOneById
 };

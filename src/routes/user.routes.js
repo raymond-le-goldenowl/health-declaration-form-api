@@ -21,11 +21,12 @@ router.post(
 	UserController.requestSave
 );
 
-router.get('/:id', verifyAccessToken, UserController.userById);
-
 router.post(
 	'/user-by-phone-number',
 	verifyAccessToken,
 	UserController.userByPhoneNumber
 );
+
+router.post('/:id', verifyAccessToken, UserController.userById);
+
 export default router;

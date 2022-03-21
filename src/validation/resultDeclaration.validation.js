@@ -1,5 +1,5 @@
-var validator = require('validator');
-const vnStr = require('vn-str');
+import vnStr from 'vn-str';
+import validator from 'validator';
 
 const findAllByUserPhoneNumberValidate = (req, res, next) => {
 	if (!validator.default.isMobilePhone(req.body?.phone_number, 'vi-VN')) {

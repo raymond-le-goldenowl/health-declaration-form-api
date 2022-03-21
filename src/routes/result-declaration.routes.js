@@ -16,4 +16,6 @@ router.post(
 	ResultDeclarationController.findAllByPhoneNumber
 );
 
+router.post('/:id', verifyAccessToken, ResultDeclarationController.getOneById);
+
 export default router;
