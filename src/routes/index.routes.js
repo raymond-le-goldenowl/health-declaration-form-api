@@ -7,4 +7,8 @@ router.use(
 	require('./epidemiological_factor.routes')
 );
 
+router.use(
+	'/health-declaration-types/',
+	require('./healthDeclarationType.routes')
+);
 module.exports = router;
