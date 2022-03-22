@@ -1,6 +1,6 @@
 export default (sequelize, Sequelize) => {
-	const Symptom = sequelize.define(
-		'symptom',
+	const EpidemiologicalFactor = sequelize.define(
+		'epidemiological_factor',
 		{
 			id: {
 				type: Sequelize.UUID,
@@ -13,9 +13,9 @@ export default (sequelize, Sequelize) => {
 			}
 		},
 		{
-			tableName: 'symptom'
+			tableName: 'epidemiological_factor'
 		}
 	);
 
-	return Symptom;
+	return EpidemiologicalFactor;
 };

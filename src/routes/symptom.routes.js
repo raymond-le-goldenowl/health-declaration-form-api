@@ -1,8 +1,11 @@
-const express = require('express');
+import express from 'express';
+
+import SymptomController from '@/controllers/symptom.controller';
+
 const router = express.Router();
-const SymptomController = require('../controllers/symptom.controller');
 
 router.get('/', SymptomController.findAll);
+
 router.get('/:id', SymptomController.findOne);
 
-module.exports = router;
+export default router;
