@@ -21,14 +21,14 @@ exports.findOne = (req, res) => {
 			if (data) {
 				res.json(data);
 			} else {
-				res.status(404).send({
+				res.status(400).send({
 					message: `Cannot find Symptom with id=${id}.`
 				});
 			}
 		})
 		.catch(err => {
 			res.status(500).send({
-				message: 'Error retrieving Symptom with id=' + id
+				message: `Error retrieving Symptom with id = ${id}`
 			});
 		});
 };
