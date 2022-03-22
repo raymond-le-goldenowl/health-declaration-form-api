@@ -1,6 +1,4 @@
-const db = require('../models');
-const Symptom = db.Symptom;
-const Op = db.Sequelize.Op;
+const Symptom = require('../models').Symptom;
 
 // Retrieve all Symptoms from the database.
 exports.findAll = (req, res) => {
