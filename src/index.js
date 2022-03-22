@@ -7,10 +7,7 @@ import cookieParser from 'cookie-parser';
 const app = express();
 
 // setup middleware
-var corsOptions = {
-	origin: 'http://localhost:3000'
-};
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(helmet());
 app.use(cookieParser());
 app.use(bodyParser.json());
@@ -34,7 +31,7 @@ import errorHandler from '@/middlewares/errorHandler';
 app.use(errorHandler);
 
 // run server
-const PORT = process.env.PORT || 1412;
+const PORT = process.env.PORT || 8081;
 app.listen(PORT, () => {
 	console.log(`Running on http://localhost:${PORT}`);
 });
