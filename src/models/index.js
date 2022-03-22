@@ -18,10 +18,10 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 db.Symptom = require('./symptom.model')(sequelize, Sequelize);
+db.Auth = require('./auth.model')(sequelize, Sequelize);
 db.EpidemiologicalFactor = require('./epidemiologicalFactor.model')(
 	sequelize,
 	Sequelize
 );
-// setup models.
 
 module.exports = db;

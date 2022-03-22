@@ -1,0 +1,8 @@
+require('dotenv').config();
+
+module.exports = {
+	ACCESS_TOKEN_SECRET: process.env.ACCESS_TOKEN_SECRET,
+	REFRESH_TOKEN_SECRET: process.env.REFRESH_TOKEN_SECRET,
+	GENERATE_ACCESS_TOKEN_EXPIRES_IN: '1h',
+	GENERATE_REFRESH_TOKEN_EXPIRES_IN: '1d'
+};
