@@ -18,7 +18,7 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 db.Symptom = require('./symptom.model')(sequelize, Sequelize);
-db.HealthDeclarationType = require('./healthDeclarationType.model')(
+db.EpidemiologicalFactor = require('./epidemiologicalFactor.model')(
 	sequelize,
 	Sequelize
 );
