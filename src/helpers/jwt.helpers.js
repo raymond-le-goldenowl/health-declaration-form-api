@@ -27,6 +27,7 @@ const verifyRefreshToken = (
 			refreshToken,
 			jwtConfig.REFRESH_TOKEN_SECRET //  || "your refresh token secret"
 		);
+
 		if (userByRefreshTokenFromDatabase.id !== decoded.id)
 			return res.sendStatus(403);
 

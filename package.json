@@ -7,7 +7,8 @@
 		"start": "nodemon --delay 500ms --exec babel-node src/index.js",
 		"clean": "rm -rf dist",
 		"build": "yarn clean && babel ./src --out-dir dist --copy-files",
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"webpack-build": "webpack"
 	},
 	"keywords": [
 		"nodejs",

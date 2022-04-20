@@ -1,6 +1,7 @@
 export default {
 	HOST: 'localhost',
 	USER: 'root',
+	PORT: '3306',
 	PASSWORD: '',
 	DB: 'health_declaration_form',
 	dialect: 'mysql',
